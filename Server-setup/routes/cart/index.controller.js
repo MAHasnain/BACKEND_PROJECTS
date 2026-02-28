@@ -1,13 +1,17 @@
 import { Router } from "express";
-import {getAllItems} from "./get.service.js";
+import {getACartItem, getAllItems} from "./get.service.js";
+import { deleteCartItem } from "./delete.service.js";
+import { newCartItem } from "./post.service.js";
 
 const cartRoutes = Router();
 
-// cartRoutes.post("/", postCart)
+cartRoutes.post("/:id", newCartItem)
 
-// cartRoutes.get("/cartItems", getAllItems)
+cartRoutes.get("/cartItems", getAllItems)
 
-// cartRoutes.get("/item:id", getACartItem)
+cartRoutes.get("/:id", getACartItem)
+
+cartRoutes.delete("/:itemId", deleteCartItem)
 
 // cartRoutes.post("/", postCart)
 
