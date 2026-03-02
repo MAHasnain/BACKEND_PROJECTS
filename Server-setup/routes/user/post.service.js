@@ -6,6 +6,7 @@ export const registerUser = async (req, res) => {
         const userdata = req.body;
 
         const user = new User(userdata);
+        // console.log(userdata);
         await user.save()
         res.status(201).send({
             success: true,
@@ -18,7 +19,8 @@ export const registerUser = async (req, res) => {
 
         res.status(500).send({
             success: false,
-            message: "Something went wrong."
+            message: "Something went wrong.",
+            error: `Error : ${error}`
         })
     }
 }

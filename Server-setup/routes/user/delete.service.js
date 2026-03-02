@@ -1,7 +1,12 @@
-const deleteUser = (req, res) => {
+import { User } from "../../model/index.js";
+
+const deleteUser = async (req, res) => {
     try {
-        
-        res.status(201).send(
+
+        const userId = req.params.id;
+        await User.findByIdAndDelete(userId)
+
+        res.status(200).send(
             {
                 success: true,
                 message: "user deleted",
