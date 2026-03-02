@@ -17,7 +17,9 @@ const deleteUser = async (req, res) => {
 
         console.log(`Error: ${error}`);
         res.status(500).send({
-            message: "Something went wrong"
+            success: false,
+            message: "Something went wrong",
+            error: error
         })
     }
 

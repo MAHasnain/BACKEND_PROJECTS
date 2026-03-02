@@ -11,7 +11,7 @@ export const registerUser = async (req, res) => {
         res.status(201).send({
             success: true,
             message: "user register",
-            user: userdata
+            user: user
         })
         // console.log("user register request send.");
 
@@ -40,7 +40,8 @@ export const loginUser = (req, res) => {
 
         res.status(500).send({
             success: false,
-            message: "Something went wrong."
+            message: "Something went wrong.",
+            error: `Error : ${error}`
         })
     }
 }

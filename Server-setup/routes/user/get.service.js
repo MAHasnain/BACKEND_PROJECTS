@@ -14,8 +14,9 @@ const getAnUser = async (req, res) => {
     } catch (error) {
         res.status(500).send(
             {
+                success: false,
                 message: "Something went wrong",
-                Error: error
+                error: error
             }
         )
     }
@@ -35,8 +36,9 @@ const getAllUser = async (req, res) => {
     } catch (error) {
         res.status(500).send(
             {
+                success: false,
                 message: "Something went wrong",
-                Error: error
+                error: error
             }
         )
     }

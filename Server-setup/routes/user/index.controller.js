@@ -14,7 +14,7 @@ userRoutes.post('/register', registerUser);
 
 userRoutes.post('/login', loginUser);
 
-userRoutes.put('/edit-profile', editProfile);
+userRoutes.put('/:id', editProfile);
 
 userRoutes.delete('/:id', deleteUser);
 

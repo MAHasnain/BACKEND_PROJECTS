@@ -1,14 +1,20 @@
-const editProfile = (req, res) => {
+import { User } from "../../model/index.js";
+
+const editProfile = async (req, res) => {
     try {
 
-        const user = req.body;
+        const userData = req.body;
+        const userId = req.params.id;
 
+        const updatedUser = await User.findByIdAndUpdate(userId, userData, { new: true })
         res.status(201).send({
+            success: true,
             message: "User updated.",
-            user: user
+            user: updatedUser
         })
     } catch (error) {
         res.status(500).send({
+            success: false,
             message: "Something went wrong",
             error: error
         })
