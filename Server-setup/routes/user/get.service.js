@@ -1,9 +1,14 @@
-const getAnUser = (req, res) => {
+import { User } from "../../model/index.js";
+
+const getAnUser = async (req, res) => {
     try {
 
-        res.status(201).send({
-            message: "",
-            
+        const { id } = req.params
+        const user = await User.findById(id);
+        res.status(200).send({
+            success: true,
+            message: "user fetched.",
+            data: user
         })
 
     } catch (error) {
@@ -16,11 +21,15 @@ const getAnUser = (req, res) => {
     }
 }
 
-const getAllUser = (req, res) => {
+const getAllUser = async (req, res) => {
     try {
 
+        const users = await User.find();
+        
         res.status(200).send({
-            message: "users fetched"
+            success: true,
+            message: "users fetched",
+            users: users
         })
 
     } catch (error) {

@@ -1,13 +1,18 @@
-export const registerUser = (req, res) => {
+import { User } from "../../model/index.js";
+
+export const registerUser = async (req, res) => {
     try {
 
         const userdata = req.body;
-        res.status(200).send({
+
+        const user = new User(userdata);
+        await user.save()
+        res.status(201).send({
             success: true,
             message: "user register",
             user: userdata
         })
-        console.log("user register request send.");
+        // console.log("user register request send.");
 
     } catch (error) {
 
