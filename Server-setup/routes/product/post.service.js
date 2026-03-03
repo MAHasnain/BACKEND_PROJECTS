@@ -1,18 +1,21 @@
-let products = [];
+import { Product } from "../../model/index.js";
 
-const newProduct = (req, res) => {
+const newProduct = async (req, res) => {
 
     try {
-        const product = req.body;
-        products.push(product);
+        const productData = req.body;
+        const product = new Product(productData);
+        await product.save();
 
         res.status(201).send({
+            success: true,
             message: "Product added.",
-            product: products
+            data: product
         })
 
     } catch (error) {
         res.status(500).send({
+            success: false,
             message: "Somthing went wrong",
             error: error
         })
