@@ -1,26 +1,35 @@
 import express from "express";
 import router from "./routes/index.controller.js";
 import mongoose from "./db/index.js";
+import logger from "./logger/winston.logger.js";
 import dotenv from "dotenv";
+import morgan from "morgan";
+import morganMiddleware from "./logger/morgan.logger.js";
 dotenv.config()
 
 const app = express();
-
-mongoose.connection.on("open", () => {
-    console.log(`🍀 Mongodb connected successfully.\n`);
-})
-mongoose.connection.on("error", (error) => {
-    console.log(`❌ Mongodb connection error.`, error);
-})
-
 app.use(express.json({ limit: "16kb" }));
+app.use(morganMiddleware);
+app.use(
+    morgan("combined", {
+        stream: {
+            write: (message) => logger.info(message.trim()),
+        },
+    })
+);
 
 app.use("/api", router)
-
 // router.get("/users", )
+
+mongoose.connection.on("open", () => {
+    logger.info(`🍀 Mongodb connected successfully.`);
+})
+mongoose.connection.on("error", (error) => {
+    logger.error(`❌ Mongodb connection error.`, error);
+})
 
 const PORT = 3000;
 
 app.listen(PORT, () => {
-    console.log(`\n⚙️  Server running on port ${PORT}.`);
+    logger.info(`⚙️  Server running on port ${PORT}.`);
 })

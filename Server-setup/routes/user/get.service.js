@@ -1,3 +1,4 @@
+import logger from "../../logger/winston.logger.js";
 import { User } from "../../model/index.js";
 
 const getAnUser = async (req, res) => {
@@ -34,6 +35,7 @@ const getAllUser = async (req, res) => {
         })
 
     } catch (error) {
+        logger.error(error)
         res.status(500).send(
             {
                 success: false,

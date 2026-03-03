@@ -1,9 +1,11 @@
+import logger from "../../logger/winston.logger.js";
 import { User } from "../../model/index.js";
 
 const deleteUser = async (req, res) => {
     try {
 
         const userId = req.params.id;
+        logger.info(userId)
         await User.findByIdAndDelete(userId)
 
         res.status(200).send(
@@ -15,7 +17,7 @@ const deleteUser = async (req, res) => {
 
     } catch (error) {
 
-        console.log(`Error: ${error}`);
+        logger.error(`Error: ${error}`);
         res.status(500).send({
             success: false,
             message: "Something went wrong",

@@ -1,3 +1,4 @@
+import logger from "../../logger/winston.logger.js";
 import { Product } from "../../model/index.js";
 
 const newProduct = async (req, res) => {
@@ -14,6 +15,7 @@ const newProduct = async (req, res) => {
         })
 
     } catch (error) {
+        logger.error(error);
         res.status(500).send({
             success: false,
             message: "Somthing went wrong",
