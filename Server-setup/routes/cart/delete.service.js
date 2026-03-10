@@ -1,5 +1,7 @@
-const deleteCartItem = (req, res) => {
+const deleteCartItem = async (req, res) => {
     try {
+
+        
         res.status(200).send({
             message: "product deleted."
         })
