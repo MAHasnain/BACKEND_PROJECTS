@@ -1,6 +1,6 @@
 import express from "express";
 import router from "./routes/index.controller.js";
-import mongoose from "./db/index.js";
+import mongoose from "./src/db/index.js";
 import logger from "./logger/winston.logger.js";
 import dotenv from "dotenv";
 import morgan from "morgan";
